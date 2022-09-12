@@ -1,9 +1,15 @@
-import type { NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
-import Image from 'next/image'
 import Header from '../components/Header'
+import Login from '../components/Login'
 
-const Home: NextPage = () => {
+const Home = () => {
+  const { data: session } = useSession()
+
+  console.log(session)
+
+  if (!session) return <Login />
+
   return (
     <div className=''>
       <Head>

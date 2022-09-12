@@ -8,8 +8,11 @@ import { BsCollectionPlayFill, BsFillChatDotsFill } from 'react-icons/bs'
 import { MdShoppingCart } from 'react-icons/md'
 import { HiUserGroup, HiViewGrid } from 'react-icons/hi'
 import { IoChevronDownCircleSharp } from 'react-icons/io5'
+import { useSession } from 'next-auth/react'
 
 const Header = () => {
+  const { data: session } = useSession()
+
   return (
     <div className='sticky top-0 z-50 flex w3-theme-d2 items-center p-2 lg:px-5 shadow-md'>
       {/* Left */}
@@ -35,6 +38,14 @@ const Header = () => {
           <HeaderIcon Icon={HiUserGroup} />
         </div>
       </div>
+      {/* profile pic */}
+      <Image
+        className='rounded-full cursor-pointer'
+        src={session?.user?.image!}
+        width='40'
+        height='40'
+        layout='fixed'
+      />
 
       {/* Right */}
       <div className='flex items-center md:space-x-2 justify-end'>
