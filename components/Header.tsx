@@ -8,7 +8,7 @@ import { BsCollectionPlayFill, BsFillChatDotsFill } from 'react-icons/bs'
 import { MdShoppingCart } from 'react-icons/md'
 import { HiUserGroup, HiViewGrid } from 'react-icons/hi'
 import { IoChevronDownCircleSharp } from 'react-icons/io5'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 
 const Header = () => {
   const { data: session } = useSession()
@@ -40,6 +40,7 @@ const Header = () => {
       </div>
       {/* profile pic */}
       <Image
+        onClick={() => signOut()}
         className='rounded-full cursor-pointer'
         src={session?.user?.image!}
         width='40'

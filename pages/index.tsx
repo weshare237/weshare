@@ -1,11 +1,14 @@
-import { useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
+import { getSession, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Login from '../components/Login'
 
-const Home = () => {
-  const { data: session } = useSession()
+interface Props {
+  session: Session
+}
 
+const Home = ({ session }: Props) => {
   console.log(session)
 
   if (!session) return <Login />
@@ -32,3 +35,13 @@ const Home = () => {
 }
 
 export default Home
+
+export const getServerSideProps = async (context: any) => {
+  const session = await getSession(context)
+
+  return {
+    props: {
+      session,
+    },
+  }
+}
